@@ -1,4 +1,4 @@
-﻿namespace RpgEssentials.TurnBase
+﻿namespace RpgEssentials.TurnBased
 {
     /// <summary>
     /// Interface that defines an entity during a Battle

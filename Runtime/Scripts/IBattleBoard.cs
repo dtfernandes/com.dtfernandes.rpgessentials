@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RpgEssentials.TurnBase
+namespace RpgEssentials.TurnBased
 {
     /// <summary>
     /// Interface that defines the conglomerate of data that pertains to a Battle 

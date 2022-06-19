@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace RpgEssentials.TurnBase
+namespace RpgEssentials.TurnBased
 {
     public abstract class BattleEntity : IBattleEntity, IEquatable<BattleEntity>
     {

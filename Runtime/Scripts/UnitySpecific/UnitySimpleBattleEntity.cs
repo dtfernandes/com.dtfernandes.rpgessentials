@@ -1,4 +1,4 @@
-﻿namespace RpgEssentials.TurnBase
+﻿namespace RpgEssentials.TurnBased
 {
     public abstract class UnitySimpleBattleEntity : SimpleBattleEntity
     {

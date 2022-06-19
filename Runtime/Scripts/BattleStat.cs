@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RpgEssentials.TurnBase
+namespace RpgEssentials.TurnBased
 {
     [Serializable]
     public struct BattleStat

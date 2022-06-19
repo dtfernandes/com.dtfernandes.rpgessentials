@@ -1,7 +1,11 @@
 {
     "name": "dtfernandes.rpgessentials.Editor",
-    "references": [],
-    "includePlatforms": [],
+    "references": [
+        "GUID:561601a004c7d844cb092f43c301a0b6"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

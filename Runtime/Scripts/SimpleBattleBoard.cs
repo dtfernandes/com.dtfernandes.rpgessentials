@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace RpgEssentials.TurnBase
+namespace RpgEssentials.TurnBased
 {
     public abstract class SimpleBattleBoard<T> : BattleBoard<T> where T : SimpleBattleEntity
     {
@@ -33,10 +33,10 @@ namespace RpgEssentials.TurnBase
                 {
                     //Check if entity has enough turn to use
                     if (entity.Turn > 0)
-                    {
+                    {                       
                         //If it has, add copy of entity to turn list
                         T copy =
-                            entity.Copy() as T;
+                            entity.Copy() as T;                        
                         TurnOrder.Add(copy);
                         entity.Turn--;
                     }
@@ -56,7 +56,7 @@ namespace RpgEssentials.TurnBase
 
             if (TurnOrder == null)
                 throw new System.Exception("Turn list is empty. Check if templates have maxTurn at 0.");
-
+           
             //return the entity selected to be next
             return Entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
         }

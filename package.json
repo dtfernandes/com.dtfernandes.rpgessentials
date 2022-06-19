@@ -14,9 +14,9 @@
     "keyword3"
   ],
   "author": {
-    "name": "Unity",
-    "email": "unity@example.com",
-    "url": "https://www.unity3d.com"
+    "name": "Daniel Fernandes",
+    "email": "example@example.com",
+    "url": "https://www.example.com"
   },
   "type": "library"
 }
