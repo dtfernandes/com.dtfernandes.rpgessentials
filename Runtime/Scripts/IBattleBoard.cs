@@ -10,7 +10,7 @@ namespace RpgEssentials.TurnBased
     public interface IBattleBoard<T> where T: IBattleEntity
     {
         //Entities in play
-        IEnumerable<T> Entities { get; set; }
+        IList<T> Entities { get; set; }
         
         //Entity in playing in the current turn
         T TurnEntity { get; set; }

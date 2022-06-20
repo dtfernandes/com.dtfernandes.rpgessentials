@@ -4,7 +4,8 @@
     {
         public int MaxTurns { get; private set; }
 
-        protected SimpleBattleEntity(int maxTurns) : base()
+        protected SimpleBattleEntity(int maxTurns, 
+            IBattleBehaviour battleBehaviour) : base(battleBehaviour)
         {
             MaxTurns = maxTurns;
         }

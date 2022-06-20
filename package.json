@@ -1,22 +1,19 @@
 {
   "name": "com.dtfernandes.rpgessentials",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "displayName": "RPG Essentials",
-  "description": "Package design with the intent to provide a easy to use but flexible arquitecture to a rpg game.",
+  "description": "Package designed with the intent to provide an easy to use but flexible arquitecture to a rpg game.",
   "unity": "2020.1",
   "unityRelease": "8f1",
-  "documentationUrl": "https://example.com/",
   "changelogUrl": "https://example.com/changelog.html",
   "licensesUrl": "https://example.com/licensing.html",
   "keywords": [
-    "keyword1",
-    "keyword2",
-    "keyword3"
+    "Rpg"
   ],
   "author": {
     "name": "Daniel Fernandes",
     "email": "example@example.com",
     "url": "https://www.example.com"
   },
-  "type": "library"
+  "type": "tools"
 }
