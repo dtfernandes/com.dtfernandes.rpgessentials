@@ -1,6 +1,6 @@
 {
   "name": "com.dtfernandes.rpgessentials",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "displayName": "RPG Essentials",
   "description": "Package designed with the intent to provide an easy to use but flexible arquitecture to a rpg game.",
   "unity": "2020.1",

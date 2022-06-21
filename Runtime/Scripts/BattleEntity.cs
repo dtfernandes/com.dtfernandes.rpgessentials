@@ -14,7 +14,7 @@ namespace RpgEssentials.TurnBased
 
         public bool IsPlayer => battleBehaviour is PlayerBattleBehaviour;
 
-        public Action<BattleEntity> onEndTurn;
+        public Action<BattleEntity> onEndTurn { get; set; }
 
         protected IBattleBehaviour battleBehaviour;
 

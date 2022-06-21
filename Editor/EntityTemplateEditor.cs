@@ -50,8 +50,6 @@ namespace RpgEssentials.TurnBased.Editor
 
                     float temp = 0;
                     temp = EditorGUILayout.FloatField(bs.DefaultValue);
-                    
-                    EditorGUILayout.FloatField(bs.CurrentValue);
 
                     //If the values are diferent than the users changed the value
                     if (temp != bs.DefaultValue)

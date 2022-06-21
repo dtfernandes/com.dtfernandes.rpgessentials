@@ -7,13 +7,13 @@ namespace RpgEssentials.TurnBased
     /// at a specific time
     /// </summary>
     /// <typeparam name="T">Entities populating the Battle</typeparam>
-    public interface IBattleBoard<T> where T: IBattleEntity
+    public interface IBattleBoard
     {
         //Entities in play
-        IList<T> Entities { get; set; }
+        IEnumerable<BattleEntity> Entities { get; }
         
         //Entity in playing in the current turn
-        T TurnEntity { get; set; }
+        BattleEntity TurnEntity { get; set; }
 
         //End current Turn and begin the next
         void NextTurn();

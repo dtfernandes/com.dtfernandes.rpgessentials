@@ -30,8 +30,17 @@ namespace RpgEssentials.TurnBased
 
     }
 
-    public class AIBattleBehaviour : IBattleBehaviour
+    //This seems convoluted
+    public class AIBattleBehaviour<T> : IBattleBehaviour where T: IBattleBoard
     {
+
+        private T board;
+
+        public AIBattleBehaviour(T board)
+        {
+            this.board = board;
+        }
+
         int t = 0;
         public void StartBehaviour()
         {

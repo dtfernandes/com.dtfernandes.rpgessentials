@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace RpgEssentials.TurnBased
 {
-    public abstract class SimpleBattleBoard<T> : BattleBoard<T> where T : SimpleBattleEntity
+    public abstract class SimpleBattleBoard<T> : BattleBoard<T> where T : BattleEntity
     {
         public IList<T> TurnOrder { get; private set; }
 
@@ -58,7 +58,7 @@ namespace RpgEssentials.TurnBased
                 throw new System.Exception("Turn list is empty. Check if templates have maxTurn at 0.");
            
             //return the entity selected to be next
-            return Entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
+            return entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
         }
     }
 }

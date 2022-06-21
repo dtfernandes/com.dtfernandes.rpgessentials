@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace RpgEssentials.TurnBased
 {
-    [CreateAssetMenu(menuName = "RpgEssentials/TurnBased/BattleMove", fileName = "Battle Move")]
+    [CreateAssetMenu(menuName = 
+        RPGEssentialsPaths.generalScriptablePath +  "/BattleMove",
+        fileName = "Battle Move")]
     public class ModularBattleMove : ScriptableObject, IBattleMove
     {
 
