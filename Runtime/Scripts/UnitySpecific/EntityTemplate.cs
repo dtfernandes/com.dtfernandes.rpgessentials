@@ -5,6 +5,10 @@ namespace RpgEssentials.TurnBased
 {
     public abstract class EntityTemplate : ScriptableObject, ISerializationCallbackReceiver
     {
+        [SerializeField]
+        private GameObject battleToken;
+        public GameObject BattleToken => battleToken;
+
         public abstract EntityMold Mold { get; }
 
         [SerializeField] [HideInInspector]

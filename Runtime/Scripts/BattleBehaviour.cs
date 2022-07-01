@@ -30,7 +30,7 @@ namespace RpgEssentials.TurnBased
 
     }
 
-    //This seems convoluted
+
     public class AIBattleBehaviour<T> : IBattleBehaviour where T: IBattleBoard
     {
 
