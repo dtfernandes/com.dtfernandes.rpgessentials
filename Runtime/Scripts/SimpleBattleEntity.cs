@@ -10,7 +10,7 @@
             MaxTurns = maxTurns;
         }
 
-        public override void ResetTurns()
+        internal override void ResetTurns()
         {
             Turn = MaxTurns;
         }

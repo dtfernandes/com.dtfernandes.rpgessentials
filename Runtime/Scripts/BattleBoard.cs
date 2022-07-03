@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace RpgEssentials.TurnBased
 {
@@ -41,6 +42,11 @@ namespace RpgEssentials.TurnBased
                 firstId++;
                 entities.Add(entity);
             }
+        }
+
+        public T GetEntityFromId(int id)
+        {
+            return entities.First(x => x.InBattleID == id);
         }
 
         public void BeginBattle()

@@ -16,16 +16,20 @@ namespace RpgEssentials.TurnBased
         private int param1;
         [SerializeField]
         private int value;
+        [SerializeField]
+        private string identifier;
+        public string Identifier => identifier;
 
 
         public void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target)
         {
-            foreach (EntityMold mold in target.Select(x => x.Mold))
+            foreach (BattleEntity be in target.Select(x => x))
             {
-                mold.SetAtIndex(param1, x => {
-                    x.CurrentValue -= value;
+                be.Mold.SetAtIndex(param1, x => {
+                    x.CurrentValue -= value;                   
                     return x; 
                 });
+                be.QuerryVitality();
             }
 
         }

@@ -9,21 +9,24 @@ namespace RpgEssentials.TurnBased
 
         protected override T PrepareTurnOrder()
         {
-
             TurnOrder = new List<T> { };
 
+            //Gather all alive entities
+            IEnumerable<T> aliveEntities = 
+                Entities.Where(x => !x.IsDead).Select(x => x as T);
+         
             //Check if there're still entities than have enough turns
-            if(!Entities.Any(x => x.Turn > 0))
+            if(!aliveEntities.Any(x => x.Turn > 0))
             {
-                //If there aren't reset the enties and begin a new turn
-                foreach(T entity in Entities)
+                //If there aren't reset the entities and begin a new turn
+                foreach(T entity in aliveEntities)
                 {
                     entity.ResetTurns();
                 }
             }
 
-            IList<T> duplicateList = 
-                Entities.Select(x => x.Copy() as T).ToList();
+            IList<T> duplicateList =
+                aliveEntities.Select(x => x.Copy() as T).ToList();
 
                  
             int loops = 0;
@@ -53,10 +56,9 @@ namespace RpgEssentials.TurnBased
             TurnOrder =
                 TurnOrder.OrderBy(x => x.OrderFunction()).ToList();
 
-
             if (TurnOrder == null)
                 throw new System.Exception("Turn list is empty. Check if templates have maxTurn at 0.");
-           
+
             //return the entity selected to be next
             return entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
         }

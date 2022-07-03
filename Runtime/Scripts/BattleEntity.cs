@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RpgEssentials.TurnBased
 {
@@ -15,6 +14,12 @@ namespace RpgEssentials.TurnBased
         public bool IsPlayer => battleBehaviour is PlayerBattleBehaviour;
 
         public Action<BattleEntity> onEndTurn { get; set; }
+        public Action<BattleEntity> onDeath { get; set; }
+
+        public Action<BattleEntity, IEnumerable<BattleEntity>, 
+            IBattleMove> onMoveUsed { get; set; }
+
+        public bool IsDead { get; private set; }
 
         protected IBattleBehaviour battleBehaviour;
 
@@ -25,7 +30,7 @@ namespace RpgEssentials.TurnBased
             ResetTurns();
         }
 
-
+       
         #region Turn Functionality
 
         public void StartTurn()
@@ -41,7 +46,7 @@ namespace RpgEssentials.TurnBased
             bool turnContinue = 
                 battleBehaviour.UpdateBehaviour();
 
-            if (!turnContinue) onEndTurn?.Invoke(this);
+            //if (!turnContinue) onEndTurn?.Invoke(this);
 
 
         }
@@ -53,23 +58,68 @@ namespace RpgEssentials.TurnBased
         }
 
         #endregion
-      
-        public virtual void ResetTurns()
+
+
+        /// <summary>
+        /// Method responsible for resolving a given move affecting a given list of entities.
+        /// This method triggers the onMoveUsed event
+        /// </summary>
+        /// <param name="move">Move to be used</param>
+        /// <param name="targets">Target Entities</param>
+        public void UseMove(IBattleMove move, IEnumerable<BattleEntity> targets)
         {
-            Turn = 1;
-       
+            //Invoke event
+            onMoveUsed?.Invoke(this, targets, move);
+
+            //Resolve move
+            move.ResolveMove(this, targets);
         }
+
+        /// <summary>
+        /// Querry if the entity is dead. Update the entity accordingly.
+        /// This method triggers the onDeath event
+        /// </summary>
+        internal void QuerryVitality()
+        {
+            if (!IsAlive())
+            {
+                onDeath?.Invoke(this);
+                IsDead = true;
+            }
+        }
+
+        //Abstract method used to define if a entity is alive or not.
+        protected abstract bool IsAlive();
+
+        /// <summary>
+        /// Method responsible for reseting the turns of the entity
+        /// </summary>
+        internal virtual void ResetTurns()
+        {
+            Turn = 1;      
+        }
+
+        /// <summary>
+        /// Abstract method used to define how this entity's order is chosen.
+        /// </summary>
         public abstract float OrderFunction();
-     
+       
+        /// <summary>
+        /// Method that copies the entity
+        /// </summary>
+        /// <returns>Copy of the entity</returns>
         public abstract BattleEntity Copy();
 
+        /// <summary>
+        /// Method that sees if two entities are equal
+        /// </summary>
+        /// <param name="other">Entity to compare</param>
+        /// <returns>Querry result</returns>
         public bool Equals(BattleEntity other)
         {
             return InBattleID == other.InBattleID;
         }
     }
-
-
 
 }
 
