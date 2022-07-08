@@ -2,17 +2,17 @@
 {
     public abstract class SimpleBattleEntity : BattleEntity
     {
-        public int MaxTurns { get; private set; }
+        public int MaxTurns { get; protected set; }
 
-        protected SimpleBattleEntity(int maxTurns, 
-            IBattleBehaviour battleBehaviour) : base(battleBehaviour)
+        protected SimpleBattleEntity(EntityMold mold,
+            IBattleBehaviour battleBehaviour) : base(mold, battleBehaviour)
         {
-            MaxTurns = maxTurns;
+
         }
 
         internal override void ResetTurns()
         {
-            Turn = MaxTurns;
+            Turn = MaxTurns; 
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SimpleImage: GUIObject
@@ -21,4 +22,14 @@ public class SimpleImage: GUIObject
     {
         image.sprite = sprite;
     }
+
+    private void OnEnable()
+    {
+        image.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        image.enabled = false;
+    }   
 }

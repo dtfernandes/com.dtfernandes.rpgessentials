@@ -13,7 +13,10 @@ namespace RpgEssentials.TurnBased
 
         public bool IsPlayer => battleBehaviour is PlayerBattleBehaviour;
 
-        public Action<BattleEntity> onEndTurn { get; set; }
+        internal Action<BattleEntity> onEndTurn { get; set; }
+
+        public Action<BattleEntity> onExitTurn { get; set; }
+
         public Action<BattleEntity> onDeath { get; set; }
 
         public Action<BattleEntity, IEnumerable<BattleEntity>, 
@@ -24,13 +27,24 @@ namespace RpgEssentials.TurnBased
         protected IBattleBehaviour battleBehaviour;
 
         //Constructor for the BattleEntity class
-        protected BattleEntity(IBattleBehaviour battleBehaviour)
+        protected BattleEntity(EntityMold mold, IBattleBehaviour battleBehaviour)
         {
+            Mold = mold.Copy();
+
+            int i = 0;
+            //Generate Stats
+            foreach (BattleStat stat in Mold.ToList())
+            {
+                Mold.SetAtIndex(i, stat.GenerateStat());
+                i++;
+            }    
+              
             this.battleBehaviour = battleBehaviour;
+
             ResetTurns();
         }
 
-       
+
         #region Turn Functionality
 
         public void StartTurn()
@@ -55,6 +69,7 @@ namespace RpgEssentials.TurnBased
         {
             Turn--;
             battleBehaviour.EndBehaviour();
+            onExitTurn?.Invoke(this);
         }
 
         #endregion

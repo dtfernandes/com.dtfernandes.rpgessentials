@@ -56,7 +56,7 @@ namespace RpgEssentials.TurnBased
             TurnOrder =
                 TurnOrder.OrderBy(x => x.OrderFunction()).ToList();
 
-            if (TurnOrder == null)
+            if (TurnOrder.Count == 0)
                 throw new System.Exception("Turn list is empty. Check if templates have maxTurn at 0.");
 
             //return the entity selected to be next

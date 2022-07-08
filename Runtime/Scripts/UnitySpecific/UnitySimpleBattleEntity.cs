@@ -3,10 +3,9 @@
     public abstract class UnitySimpleBattleEntity : SimpleBattleEntity
     {
         public UnitySimpleBattleEntity
-            (EntityMold mold ,int maxTurns, IBattleBehaviour battleBehaviour):
-            base(maxTurns, battleBehaviour)
+            (EntityMold mold, IBattleBehaviour battleBehaviour):
+            base(mold, battleBehaviour)
         {
-            this.Mold = mold.Copy();
         }
     }
 }

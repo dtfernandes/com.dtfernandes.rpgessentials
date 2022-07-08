@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RpgEssentials.TurnBased
@@ -10,12 +11,20 @@ namespace RpgEssentials.TurnBased
         public GameObject BattleToken => battleToken;
 
         public abstract EntityMold Mold { get; }
+        
+        public List<SerializableBattleStat> SerializedStats { get => serializedStats; set => serializedStats = value; }
 
         [SerializeField] [HideInInspector]
         private List<SerializableBattleStat> serializedStats;
         [SerializeField] [HideInInspector]
+        private List<bool> serializedFlattens;
+
+        [SerializeField] [HideInInspector]
         private List<ModularBattleMove> moves;
 
+        [SerializeField]
+        int id;
+        
         /// <summary>
         /// Deserialize Class
         /// </summary>
@@ -44,19 +53,10 @@ namespace RpgEssentials.TurnBased
         /// </summary>
         public void OnBeforeSerialize()
         {
+
+            if (Mold == null) return;
+
             #region Serialize Stat List
-            //Make sure the helper list isnt null
-            if (serializedStats == null)
-                serializedStats = new List<SerializableBattleStat> { };
-
-            //empty helper list
-            serializedStats.Clear();
-
-            //Add mold stats to helper list
-            foreach (BattleStat bs in Mold.ToList())
-            {
-                serializedStats.Add(new SerializableBattleStat(bs));
-            }
 
             #endregion
 
@@ -74,7 +74,9 @@ namespace RpgEssentials.TurnBased
             }
             #endregion
         }
+
     }
+
 }
 
 

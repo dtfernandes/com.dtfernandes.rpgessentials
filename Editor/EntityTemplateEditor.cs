@@ -19,6 +19,7 @@ namespace RpgEssentials.TurnBased.Editor
         {
             EditorUtility.SetDirty(target);
             moves = serializedObject.FindProperty("moves");
+ 
 
             moldfoldout = true;
             movesfoldout = true;
@@ -30,7 +31,8 @@ namespace RpgEssentials.TurnBased.Editor
 
             serializedObject.Update();
 
-            EntityMold mold = (target as EntityTemplate).Mold;
+            EntityTemplate template = target as EntityTemplate;
+            EntityMold mold = template.Mold;
             List<BattleStat> listOfStats =
                 mold.ToList().ToList();
 
@@ -48,13 +50,23 @@ namespace RpgEssentials.TurnBased.Editor
                     GUILayout.Label(bs.Name);
                     GUILayout.Space(10);
 
-                    float temp = 0;
-                    temp = EditorGUILayout.FloatField(bs.DefaultValue);
+                    SerializableBattleStat ent = template.SerializedStats[i];
+                    
+                    RangedInt templateStat = default;
+                    templateStat = CustomEditorGUILayout.RangeIntField(ent.DefaultValue);
 
-                    //If the values are diferent than the users changed the value
-                    if (temp != bs.DefaultValue)
+                    
+
+                    //If the values are diferent then the users changed the value
+                    if (templateStat != template.SerializedStats[i].DefaultValue
+                        || templateStat.Flatten != template.SerializedStats[i].DefaultValue.Flatten)
                     {
-                        BattleStat newStat = new BattleStat(temp, bs.Name);
+                        SerializableBattleStat newSerStat = 
+                            new SerializableBattleStat(bs.Name, templateStat); 
+
+                        template.SerializedStats[i] = newSerStat;
+
+                        BattleStat newStat = new BattleStat(newSerStat.DefaultValue, bs.Name);
                         mold.SetAtIndex(i, newStat);                        
                     }
 
@@ -84,5 +96,8 @@ namespace RpgEssentials.TurnBased.Editor
 
             serializedObject.ApplyModifiedProperties();
         }
+
+
+
     }
 }
