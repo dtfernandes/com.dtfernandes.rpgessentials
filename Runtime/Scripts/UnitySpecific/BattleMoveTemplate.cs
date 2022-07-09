@@ -7,7 +7,7 @@ namespace RpgEssentials.TurnBased
     [CreateAssetMenu(menuName = 
         RPGEssentialsPaths.generalScriptablePath +  "/BattleMove",
         fileName = "Battle Move")]
-    public class ModularBattleMove : ScriptableObject, IBattleMove
+    public class BattleMoveTemplate : ScriptableObject, IBattleMove
     {
 
         [SerializeField] [HideInInspector]

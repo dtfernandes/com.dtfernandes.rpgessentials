@@ -20,11 +20,8 @@ namespace RpgEssentials.TurnBased
         private List<bool> serializedFlattens;
 
         [SerializeField] [HideInInspector]
-        private List<ModularBattleMove> moves;
+        private List<BattleMoveTemplate> moves;
 
-        [SerializeField]
-        int id;
-        
         /// <summary>
         /// Deserialize Class
         /// </summary>
@@ -41,7 +38,7 @@ namespace RpgEssentials.TurnBased
             //Clear Move List
             Mold.Moves = new List<IBattleMove> { };
             //Add elements from helper list to move list
-            foreach (ModularBattleMove move in moves)
+            foreach (BattleMoveTemplate move in moves)
             {
                 Mold.Moves.Add(move);
             }
@@ -62,7 +59,7 @@ namespace RpgEssentials.TurnBased
 
             #region Serialize Move List
             //Make sure helper list is never null
-            if (moves == null) moves = new List<ModularBattleMove> { };
+            if (moves == null) moves = new List<BattleMoveTemplate> { };
 
             //empty helper list
             moves.Clear();
@@ -70,7 +67,7 @@ namespace RpgEssentials.TurnBased
             //Add moves to helper list
             foreach(IBattleMove move in Mold.Moves)
             {
-                moves.Add(move as ModularBattleMove);
+                moves.Add(move as BattleMoveTemplate);
             }
             #endregion
         }

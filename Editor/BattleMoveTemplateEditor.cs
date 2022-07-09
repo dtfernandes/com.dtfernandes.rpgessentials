@@ -9,8 +9,8 @@ using System.Linq;
 
 namespace RpgEssentials.TurnBased.Editor
 {
-    [CustomEditor(typeof(ModularBattleMove))]
-    public class ModularBattleMoveEditor : Inspector
+    [CustomEditor(typeof(BattleMoveTemplate))]
+    public class BattleMoveTemplateEditor : Inspector
     {
         SerializedProperty selectedMold;
         SerializedProperty param1;
