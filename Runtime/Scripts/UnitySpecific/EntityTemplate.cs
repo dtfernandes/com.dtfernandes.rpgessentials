@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RpgEssentials.TurnBased
@@ -55,6 +56,7 @@ namespace RpgEssentials.TurnBased
         {
             if (Mold == null) return;
 
+            
             #region Serialize Stat List
 
             #endregion

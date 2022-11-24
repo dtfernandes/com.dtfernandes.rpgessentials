@@ -18,9 +18,9 @@ public class RangedIntDrawer : PropertyDrawer
         EditorGUI.BeginProperty(position, label, property);
 
         SerializedProperty vMin = 
-            property.FindPropertyRelative("minV");
+            property.FindPropertyRelative("min");
         SerializedProperty vMax = 
-            property.FindPropertyRelative("maxV");
+            property.FindPropertyRelative("max");
         SerializedProperty flatten =
             property.FindPropertyRelative("flatten");
 

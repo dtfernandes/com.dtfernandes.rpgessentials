@@ -6,13 +6,13 @@ using System;
 [System.Serializable]
 public struct RangedInt : IEquatable<RangedInt>
 {
-    private int min;
-    private int max;
-    private bool flatten;
+    public int min;
+    public int max;
+    public bool flatten;
 
     /// <summary>
     /// Min value the int can be
-    /// </summary>
+    /// </summary>  
     public int Min => min;
 
     /// <summary>
