@@ -50,6 +50,9 @@ namespace RpgEssentials.TurnBased.Editor
                     GUILayout.Label(bs.Name);
                     GUILayout.Space(10);
 
+                    if (template.SerializedStats.Count <= i)
+                        template.SerializedStats.Add(new SerializableBattleStat());
+
                     SerializableBattleStat ent = template.SerializedStats[i];
                     
                     RangedInt templateStat = default;

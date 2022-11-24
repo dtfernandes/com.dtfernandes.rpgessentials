@@ -6,7 +6,7 @@ namespace RpgEssentials.TurnBased
     public abstract class BattleEntity : IBattleEntity, IEquatable<BattleEntity>
     {
         public short InBattleID { get; set; }
-        
+
         public int Turn { get; set; }
 
         public EntityMold Mold { get; set; }
@@ -19,8 +19,9 @@ namespace RpgEssentials.TurnBased
 
         public Action<BattleEntity> onDeath { get; set; }
 
-        public Action<BattleEntity, IEnumerable<BattleEntity>, 
-            IBattleMove> onMoveUsed { get; set; }
+        public Action<BattleEntity, IEnumerable<BattleEntity>,
+            IBattleMove> onMoveUsed
+        { get; set; }
 
         public bool IsDead { get; private set; }
 
@@ -37,8 +38,8 @@ namespace RpgEssentials.TurnBased
             {
                 Mold.SetAtIndex(i, stat.GenerateStat());
                 i++;
-            }    
-              
+            }
+
             this.battleBehaviour = battleBehaviour;
 
             ResetTurns();
@@ -57,14 +58,14 @@ namespace RpgEssentials.TurnBased
 
         public virtual void UpdateTurn()
         {
-            bool turnContinue = 
+            bool turnContinue =
                 battleBehaviour.UpdateBehaviour();
 
             //if (!turnContinue) onEndTurn?.Invoke(this);
 
 
         }
-        
+
         public virtual void EndTurn()
         {
             Turn--;
@@ -87,7 +88,7 @@ namespace RpgEssentials.TurnBased
             onMoveUsed?.Invoke(this, targets, move);
 
             //Resolve move
-            move.ResolveMove(this, targets);
+            move?.ResolveMove(this, targets);
         }
 
         /// <summary>
@@ -109,16 +110,16 @@ namespace RpgEssentials.TurnBased
         /// <summary>
         /// Method responsible for reseting the turns of the entity
         /// </summary>
-        internal virtual void ResetTurns()
+        public virtual void ResetTurns()
         {
-            Turn = 1;      
+            Turn = 1;
         }
 
         /// <summary>
         /// Abstract method used to define how this entity's order is chosen.
         /// </summary>
         public abstract float OrderFunction();
-       
+
         /// <summary>
         /// Method that copies the entity
         /// </summary>
@@ -134,9 +135,14 @@ namespace RpgEssentials.TurnBased
         {
             return InBattleID == other.InBattleID;
         }
-    }
 
+        public void ForceEndTurn()
+        {
+            onEndTurn?.Invoke(this);
+        }
+    }
 }
+
 
 
 

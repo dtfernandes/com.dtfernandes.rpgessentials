@@ -33,7 +33,7 @@ namespace RpgEssentials.TurnBased
 
         /// <summary>
         /// Constructor for the BattleStat class. 
-        /// Not sure if this is needed but I'm to scared to remove
+        /// Not sure if this is needed but I'm to scared to remove it
         /// </summary>
         /// <param name="name">Name of the stat</param>
         /// <param name="battleStat">Stat to copy</param>

@@ -9,21 +9,24 @@ using System.Linq;
 
 namespace RpgEssentials.TurnBased.Editor
 {
-    [CustomEditor(typeof(BattleMoveTemplate))]
+    [CustomEditor(typeof(BattleMoveTemplate), editorForChildClasses: true)]
     public class BattleMoveTemplateEditor : Inspector
     {
         SerializedProperty selectedMold;
-        SerializedProperty param1;
+
+        bool isFold;
 
         string[] molds;
         Type[] types;
         Type moldType;
 
+        BattleMoveTemplate move;
+
         private void OnEnable()
         {
             selectedMold = serializedObject.FindProperty("selectedMold");
-            param1 = serializedObject.FindProperty("param1");
 
+            move = (BattleMoveTemplate)target;
 
             #region Get Mold Type
             var type = typeof(EntityMold);
@@ -35,8 +38,6 @@ namespace RpgEssentials.TurnBased.Editor
             molds = types.Select(x => x.Name).ToArray();
 
             #endregion
-
-
         }
 
         
@@ -48,7 +49,7 @@ namespace RpgEssentials.TurnBased.Editor
 
             serializedObject.Update();
 
-
+            GUILayout.Space(10);
          
             selectedMold.intValue =
                 EditorGUILayout.Popup(selectedMold.intValue, molds);
@@ -64,8 +65,23 @@ namespace RpgEssentials.TurnBased.Editor
             string[] statsNames = statsInfo.Select(x => x.Name).ToArray();
             #endregion
 
-            param1.intValue =
-                EditorGUILayout.Popup(param1.intValue, statsNames);
+
+            isFold = EditorGUILayout.BeginFoldoutHeaderGroup(isFold, "Parameters");
+
+            if (isFold)
+            {
+                IList<int> list = move.GetParams();
+                IList<int> returnList = new List<int> { };
+                for (int i = 0; i < list.Count; i++)
+                {                     
+                    int value = EditorGUILayout.Popup(list[i], statsNames);
+                    returnList.Add(value);
+                }
+                move.SetParams(returnList);
+            }
+
+            EditorGUILayout.EndFoldoutHeaderGroup();
+
 
 
             serializedObject.ApplyModifiedProperties();
