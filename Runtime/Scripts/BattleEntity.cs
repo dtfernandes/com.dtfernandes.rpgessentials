@@ -13,6 +13,8 @@ namespace RpgEssentials.TurnBased
 
         public bool IsPlayer => battleBehaviour is PlayerBattleBehaviour;
 
+        public Action<BattleEntity> onEnterTurn { get; set; }
+
         internal Action<BattleEntity> onEndTurn { get; set; }
 
         public Action<BattleEntity> onExitTurn { get; set; }
@@ -50,6 +52,7 @@ namespace RpgEssentials.TurnBased
 
         public void StartTurn()
         {
+            onEnterTurn?.Invoke(this);
             StartOverride();
             battleBehaviour.StartBehaviour();
         }
