@@ -101,9 +101,9 @@ namespace RpgEssentials.TurnBased
         internal void QuerryVitality()
         {
             if (!IsAlive())
-            {
-                onDeath?.Invoke(this);
+            {     
                 IsDead = true;
+                onDeath?.Invoke(this);
             }
         }
 
