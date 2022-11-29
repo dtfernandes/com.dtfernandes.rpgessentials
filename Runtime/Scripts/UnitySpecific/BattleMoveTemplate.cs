@@ -57,7 +57,7 @@ namespace RpgEssentials.TurnBased
         {
             foreach(ConditionPacket packet in conditions)
             {
-                //UnityEngine.Debug.Log(packet.GetCondition().Condition(battleBoard , x, template));
+                UnityEngine.Debug.Log(packet.GetCondition().Condition(battleBoard , x, template));
             }
 
             return true;
