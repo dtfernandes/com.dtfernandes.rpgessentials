@@ -8,8 +8,8 @@ using System.Reflection;
 
 namespace RpgEssentials.TurnBased
 {
-    [CustomPropertyDrawer(typeof(ConditionPacket))]
-    public class ConditionPacketsDrawer : PropertyDrawer
+    //[CustomPropertyDrawer(typeof(ConditionPacket))]
+    public class CostPacketDrawer : PropertyDrawer
     {
         private bool initialized = false;
 
@@ -123,36 +123,6 @@ namespace RpgEssentials.TurnBased
             }
             #endregion
 
-            #region CostCondition Implementation
-            if (conditions[conditionIndex.intValue] == typeof(Cost))
-            {
-                int index = 0;
-                SerializedProperty intHelperList =
-                         property.FindPropertyRelative("values");
-
-                if (intHelperList.arraySize == 0)
-                    for (int i = 0; i < sizeMulti.intValue; i++)
-                    {
-                        intHelperList.InsertArrayElementAtIndex(0);
-                    }
-
-                //Select Some Mold
-
-                foreach (FieldInfo i in target.intList)
-                {
-                    Vector2 newPos = new Vector2(currentRect.position.x,
-                            currentRect.position.y + size.y);
-                    currentRect = new Rect(newPos, size);
-
-                    SerializedProperty prop =
-                            intHelperList.GetArrayElementAtIndex(index);
-
-                    prop.intValue
-                            = EditorGUI.IntField(currentRect, i.Name, prop.intValue);
-                    index++;
-                }
-            }
-            #endregion
         }
 
         private void SetupChosenCondition()

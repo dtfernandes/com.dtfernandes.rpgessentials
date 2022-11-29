@@ -60,7 +60,7 @@ namespace RpgEssentials.TurnBased
                 //UnityEngine.Debug.Log(packet.GetCondition().Condition(battleBoard , x, template));
             }
 
-            return false;
+            return true;
         }
     }
 
@@ -101,9 +101,15 @@ namespace RpgEssentials.TurnBased
     [System.Serializable]
     public class Cost : ICondition
     {
+        [SerializeField]
+        int cost;
+
+        [SerializeField]
+        int targetParam;
+
         public bool Condition(IBattleBoard board, BattleEntity target, IBattleMove move)
         {
-            throw new System.NotImplementedException();
+            return board.TurnEntity.Mold.GetStatAt(targetParam).CurrentValue >= cost;
         }
     }
 
