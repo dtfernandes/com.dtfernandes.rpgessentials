@@ -9,7 +9,7 @@ namespace RpgEssentials.TurnBased
 
         public int CurrentValue { get; set; }
 
-        public int MaxValueValue { get; private set; }
+        public int MaxValue { get; private set; }
 
         public string Name { get; }
 
@@ -24,11 +24,19 @@ namespace RpgEssentials.TurnBased
         {
             this.Name = name;
             this.defaultValue = defaultValue;
-            
-            //Value just to know when the Stat isn't being 
-            //generated properly
-            this.CurrentValue = -99;
-            this.MaxValueValue = -99;
+
+            if (defaultValue == null)
+            {
+                //Value just to know when the Stat isn't being 
+                //generated properly
+                this.CurrentValue = -99;
+                this.MaxValue = -99;
+            }
+            else
+            {
+                this.CurrentValue = defaultValue.min;
+                this.MaxValue = defaultValue.max;
+            }
         }
 
         /// <summary>
@@ -43,7 +51,7 @@ namespace RpgEssentials.TurnBased
             this.defaultValue = battleStat.defaultValue;
            
             this.CurrentValue = battleStat.CurrentValue;
-            this.MaxValueValue = battleStat.MaxValueValue;
+            this.MaxValue = battleStat.MaxValue;
 
         }
 
@@ -57,13 +65,13 @@ namespace RpgEssentials.TurnBased
             int value = defaultValue;
 
             CurrentValue = value;
-            MaxValueValue = value;
+            MaxValue = value;
             return this;
         }
 
         public override string ToString()
         {
-            return $"{Name}: {CurrentValue}/{MaxValueValue}";
+            return $"{Name}: {CurrentValue}/{MaxValue}";
         }
 
         public static explicit operator float(BattleStat self)
