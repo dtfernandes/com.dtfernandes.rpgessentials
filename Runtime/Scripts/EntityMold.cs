@@ -10,6 +10,8 @@ namespace RpgEssentials.TurnBased
         private List<IBattleMove> moves;
         public List<IBattleMove> Moves { get => moves; set => moves = value; }
 
+        public abstract bool IsPresistent { get; protected set; }
+
         //Constructor for the EntityMold class
         public EntityMold()
         {

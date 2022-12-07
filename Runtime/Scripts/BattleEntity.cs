@@ -35,11 +35,23 @@ namespace RpgEssentials.TurnBased
             Mold = mold.Copy();
 
             int i = 0;
-            //Generate Stats
-            foreach (BattleStat stat in Mold.ToList())
+
+            if (!mold.IsPresistent)
             {
-                Mold.SetAtIndex(i, stat.GenerateStat());
-                i++;
+                //Generate Stats
+                foreach (BattleStat stat in Mold.ToList())
+                {
+                    Mold.SetAtIndex(i, stat.GenerateStat());
+                    i++;
+                }
+            }
+            else
+            {
+                foreach (BattleStat stat in Mold.ToList())
+                {
+                    Mold.SetAtIndex(i, stat);
+                    i++;
+                }
             }
 
             this.battleBehaviour = battleBehaviour;
