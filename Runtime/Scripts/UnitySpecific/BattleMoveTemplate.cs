@@ -107,6 +107,12 @@ namespace RpgEssentials.TurnBased
         [SerializeField]
         int targetParam;
 
+        public Cost(int cost, int targetParam)
+        {
+            this.cost = cost;
+            this.targetParam = targetParam;
+        }
+
         public bool Condition(IBattleBoard board, BattleEntity target, IBattleMove move)
         {
             return board.TurnEntity.Mold.GetStatAt(targetParam).CurrentValue >= cost;
@@ -131,6 +137,8 @@ namespace RpgEssentials.TurnBased
         }
     }
 
+
+
     [System.Serializable]
     public class ConditionPacket
     {
@@ -143,8 +151,25 @@ namespace RpgEssentials.TurnBased
 
 
         public ICondition GetCondition()
-        {
-            return null;
+        { 
+            //Create Name List of Possible Conditions                    
+            var type = typeof(ICondition);
+
+            Type[] conditions = AppDomain.CurrentDomain.GetAssemblies()
+               .SelectMany(s => s.GetTypes())
+               .Where(p => type.IsAssignableFrom(p)
+                   && !p.IsInterface && !p.IsAbstract).ToArray();
+
+            Type selectedType = conditions[conditionIndex];
+
+            ICondition cond = null;
+
+            if (selectedType == typeof(Cost))
+            {
+                cond = new Cost(values[0], values[1]);
+            }
+
+            return cond;
         }
     }
 }
