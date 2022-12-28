@@ -55,12 +55,18 @@ namespace RpgEssentials.TurnBased
 
         public bool PassesCondition(IBattleBoard battleBoard, BattleEntity x, BattleMoveTemplate template)
         {
+            bool passes = true;
+
             foreach(ConditionPacket packet in conditions)
             {
-                UnityEngine.Debug.Log(packet.GetCondition().Condition(battleBoard , x, template));
+                if(packet.GetCondition().Condition(battleBoard , x, template))
+                {
+                    passes = false;
+                    break;
+                }
             }
 
-            return true;
+            return passes;
         }
     }
 
