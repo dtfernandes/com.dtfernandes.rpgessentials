@@ -59,7 +59,7 @@ namespace RpgEssentials.TurnBased
 
             foreach(ConditionPacket packet in conditions)
             {
-                if(packet.GetCondition().Condition(battleBoard , x, template))
+                if(!packet.GetCondition().Condition(battleBoard , x, template))
                 {
                     passes = false;
                     break;
