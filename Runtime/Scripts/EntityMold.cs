@@ -12,7 +12,7 @@ namespace RpgEssentials.TurnBased
 
         public abstract bool IsPresistent { get; protected set; }
 
-        public virtual string EntityName { get; protected set; }
+        public abstract string EntityName { get; protected set; }
 
         //Constructor for the EntityMold class
         public EntityMold()
