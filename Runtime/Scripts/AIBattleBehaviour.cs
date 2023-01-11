@@ -14,7 +14,7 @@ namespace RpgEssentials.TurnBased
             this.board = board;
         }
 
-        public void StartBehaviour()
+        public virtual void StartBehaviour()
         {
             entity = board.TurnEntity;
 
@@ -29,12 +29,12 @@ namespace RpgEssentials.TurnBased
             entity.UseMove(selectedMove,entities);
         }
     
-        public bool UpdateBehaviour()
+        public virtual bool UpdateBehaviour()
         {
             return true;
         }
 
-        public void EndBehaviour()
+        public virtual void EndBehaviour()
         {
          
         }
