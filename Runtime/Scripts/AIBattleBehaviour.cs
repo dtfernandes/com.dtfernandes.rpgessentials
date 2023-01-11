@@ -5,8 +5,8 @@ namespace RpgEssentials.TurnBased
 {
     public class AIBattleBehaviour<T> : IBattleBehaviour where T: IBattleBoard
     {
-        private BattleEntity entity;
-        private T board;
+        protected BattleEntity entity;
+        protected T board;
 
         public AIBattleBehaviour(T board)
         {
