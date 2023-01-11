@@ -24,7 +24,7 @@ namespace RpgEssentials.TurnBased
         public Action<BattleEntity, IEnumerable<BattleEntity>,
             IBattleMove> onMoveUsed
         { get; set; }
-
+        
         public bool IsDead { get; private set; }
 
         protected IBattleBehaviour battleBehaviour;
@@ -63,10 +63,10 @@ namespace RpgEssentials.TurnBased
         #region Turn Functionality
 
         public void StartTurn()
-        {
-            onEnterTurn?.Invoke(this);
+        { 
             StartOverride();
             battleBehaviour.StartBehaviour();
+            onEnterTurn?.Invoke(this);
         }
 
         protected abstract void StartOverride();

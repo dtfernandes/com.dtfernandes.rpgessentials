@@ -26,7 +26,6 @@ namespace RpgEssentials.TurnBased
         [SerializeField]
         private List<ConditionPacket> conditions;
 
-        [Header("Costs")]
         [Header("Config")]
         [SerializeField]
         private SelectionMode mode;
@@ -50,6 +49,7 @@ namespace RpgEssentials.TurnBased
             {
                 ResolveMoveAbstract(attacker, be);
                 be.QuerryVitality();
+                
             }
         }
 
