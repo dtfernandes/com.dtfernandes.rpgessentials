@@ -99,11 +99,11 @@ namespace RpgEssentials.TurnBased
         /// <param name="targets">Target Entities</param>
         public void UseMove(IBattleMove move, IEnumerable<BattleEntity> targets)
         {
-            //Invoke event
-            onMoveUsed?.Invoke(this, targets, move);
-
             //Resolve move
             move?.ResolveMove(this, targets);
+           
+            //Invoke event
+            onMoveUsed?.Invoke(this, targets, move);
         }
 
         /// <summary>

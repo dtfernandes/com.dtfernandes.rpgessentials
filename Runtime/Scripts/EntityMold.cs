@@ -12,6 +12,8 @@ namespace RpgEssentials.TurnBased
 
         public abstract bool IsPresistent { get; protected set; }
 
+        public virtual bool Name { get; protected set; }
+
         //Constructor for the EntityMold class
         public EntityMold()
         {
