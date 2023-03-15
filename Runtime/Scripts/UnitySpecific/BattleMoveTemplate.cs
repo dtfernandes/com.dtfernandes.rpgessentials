@@ -6,7 +6,6 @@ using System;
 
 namespace RpgEssentials.TurnBased
 {
-
     public abstract class BattleMoveTemplate : ScriptableObject, IBattleMove
     {
 
@@ -25,6 +24,7 @@ namespace RpgEssentials.TurnBased
         [Header("Conditions")]
         [SerializeField]
         private List<ConditionPacket> conditions;
+        public List<ConditionPacket> Conditions => conditions;
 
         [Header("Config")]
         [SerializeField]
@@ -48,8 +48,7 @@ namespace RpgEssentials.TurnBased
             foreach (BattleEntity be in target)
             {
                 ResolveMoveAbstract(attacker, be);
-                be.QuerryVitality();
-                
+                be.QuerryVitality();                
             }
         }
 

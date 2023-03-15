@@ -22,8 +22,7 @@ namespace RpgEssentials.TurnBased
         [HideInInspector]
         private List<bool> serializedFlattens;
 
-        [SerializeField]
-        [HideInInspector]
+        [SerializeField] [HideInInspector]
         private List<BattleMoveTemplate> moves;
 
         /// <summary>

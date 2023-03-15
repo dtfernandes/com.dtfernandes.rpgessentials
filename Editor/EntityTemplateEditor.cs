@@ -99,8 +99,5 @@ namespace RpgEssentials.TurnBased.Editor
 
             serializedObject.ApplyModifiedProperties();
         }
-
-
-
     }
 }
