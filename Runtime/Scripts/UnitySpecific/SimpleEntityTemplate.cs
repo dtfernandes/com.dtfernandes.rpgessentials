@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public abstract class SimpleEntityTemplate : EntityTemplate
 {
     [SerializeField]
-    private Sprite orderIcon;
+    protected Sprite orderIcon;
     public Sprite OrderIcon => orderIcon;
 
    
