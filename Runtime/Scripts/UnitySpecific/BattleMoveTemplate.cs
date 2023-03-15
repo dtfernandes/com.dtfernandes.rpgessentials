@@ -112,6 +112,9 @@ namespace RpgEssentials.TurnBased
         [SerializeField]
         int targetParam;
 
+        public int CostValue => cost;
+        public int TargetParam => targetParam;
+
         public Cost(int cost, int targetParam)
         {
             this.cost = cost;
