@@ -24,6 +24,10 @@ namespace RpgEssentials.TurnBased
 
         [SerializeField] [HideInInspector]
         private List<BattleMoveTemplate> moves;
+        [SerializeField] [HideInInspector]
+        public List<BattleMoveTemplate> Moves{ get => moves; set => moves = value;}
+
+
 
         /// <summary>
         /// Deserialize Class
