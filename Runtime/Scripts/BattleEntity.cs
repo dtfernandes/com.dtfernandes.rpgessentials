@@ -110,7 +110,7 @@ namespace RpgEssentials.TurnBased
         /// Querry if the entity is dead. Update the entity accordingly.
         /// This method triggers the onDeath event
         /// </summary>
-        internal void QuerryVitality()
+        public void QuerryVitality()
         {
             if (!IsAlive())
             {     
