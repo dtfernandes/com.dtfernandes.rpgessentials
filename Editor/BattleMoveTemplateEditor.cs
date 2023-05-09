@@ -28,6 +28,8 @@ namespace RpgEssentials.TurnBased.Editor
 
             move = (BattleMoveTemplate)target;
 
+            EditorUtility.SetDirty(target);
+
             #region Get Mold Type
             var type = typeof(EntityMold);
 
