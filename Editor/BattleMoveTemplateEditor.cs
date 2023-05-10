@@ -28,6 +28,9 @@ namespace RpgEssentials.TurnBased.Editor
 
             move = (BattleMoveTemplate)target;
 
+            EditorUtility.SetDirty(target);
+            PrefabUtility.RecordPrefabInstancePropertyModifications(target);
+
             #region Get Mold Type
             var type = typeof(EntityMold);
 
