@@ -41,7 +41,7 @@ namespace RpgEssentials.TurnBased
         public abstract void SetParams(IList<int> parameters);
 
         protected abstract void ResolveMoveAbstract
-            (BattleEntity attacker, BattleEntity target);
+            (BattleEntity attacker, BattleEntity target, bool check);
 
         public virtual void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target)
         {
