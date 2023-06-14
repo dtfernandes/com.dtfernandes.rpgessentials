@@ -7,7 +7,7 @@ namespace RpgEssentials.TurnBased
     {
         string Identifier { get; }
 
-        void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target, bool check);
+        void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target);
     }
 
 }
