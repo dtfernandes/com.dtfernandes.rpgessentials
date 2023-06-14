@@ -14,7 +14,7 @@ namespace RpgEssentials.TurnBased
         private int param2;
 
         protected override void ResolveMoveAbstract(BattleEntity attacker, 
-            BattleEntity target)
+            BattleEntity target, bool check)
         {
             target.Mold.SetAtIndex(param1, x => 
             {

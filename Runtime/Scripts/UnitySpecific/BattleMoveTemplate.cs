@@ -43,11 +43,11 @@ namespace RpgEssentials.TurnBased
         protected abstract void ResolveMoveAbstract
             (BattleEntity attacker, BattleEntity target, bool check);
 
-        public virtual void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target)
+        public virtual void ResolveMove(BattleEntity attacker, IEnumerable<BattleEntity> target, bool check)
         {
             foreach (BattleEntity be in target)
             {
-                ResolveMoveAbstract(attacker, be);
+                ResolveMoveAbstract(attacker, be, check);
                 be.QuerryVitality();                
             }
         }
