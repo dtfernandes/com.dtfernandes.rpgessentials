@@ -100,7 +100,7 @@ namespace RpgEssentials.TurnBased
         public void UseMove(IBattleMove move, IEnumerable<BattleEntity> targets)
         {
             //Resolve move
-            move?.ResolveMove(this, targets, false);
+            move?.ResolveMove(this, targets);
            
             //Invoke event
             onMoveUsed?.Invoke(this, targets, move);
