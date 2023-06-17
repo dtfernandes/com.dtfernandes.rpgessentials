@@ -117,6 +117,10 @@ namespace RpgEssentials.TurnBased
                 IsDead = true;
                 onDeath?.Invoke(this);
             }
+            else
+            {
+                IsDead = false;
+            }
         }
 
         //Abstract method used to define if a entity is alive or not.
