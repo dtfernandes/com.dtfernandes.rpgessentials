@@ -20,6 +20,7 @@ namespace RpgEssentials.TurnBased
         public Action<BattleEntity> onExitTurn { get; set; }
 
         public Action<BattleEntity> onDeath { get; set; }
+        public Action<BattleEntity> onRevive { get; set; }
 
         public Action<BattleEntity, IEnumerable<BattleEntity>,
             IBattleMove> onMoveUsed
@@ -119,7 +120,9 @@ namespace RpgEssentials.TurnBased
             }
             else
             {
-                IsDead = false;
+                if (IsDead)
+                    onRevive?.Invoke(this);
+                IsDead = false;                
             }
         }
 
