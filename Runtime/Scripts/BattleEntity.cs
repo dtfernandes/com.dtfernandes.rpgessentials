@@ -136,6 +136,11 @@ namespace RpgEssentials.TurnBased
         public abstract float OrderFunction();
 
         /// <summary>
+        /// Method responsible for handling an entity revive funcionality
+        /// </summary>
+        public abstract void Revive();
+
+        /// <summary>
         /// Method that copies the entity
         /// </summary>
         /// <returns>Copy of the entity</returns>
