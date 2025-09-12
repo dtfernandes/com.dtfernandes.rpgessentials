@@ -7,7 +7,7 @@ namespace RpgEssentials.TurnBased
 {
     public interface IBattleBehaviour
     {
-        void StartBehaviour();
+        void StartBehaviour(BattleBoard board);
         bool UpdateBehaviour();
         void EndBehaviour();
     }

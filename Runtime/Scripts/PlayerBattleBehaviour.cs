@@ -2,9 +2,9 @@
 {
     public class PlayerBattleBehaviour : IBattleBehaviour
     {
-        public void StartBehaviour()
+        public void StartBehaviour(BattleBoard board)
         {
-            //Open player menu
+
         }
 
         public bool UpdateBehaviour()
@@ -13,7 +13,7 @@
         }
         public void EndBehaviour()
         {
-           
+
         }
 
     }

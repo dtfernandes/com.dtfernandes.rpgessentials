@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace RpgEssentials.TurnBased
 {
@@ -25,7 +26,7 @@ namespace RpgEssentials.TurnBased
         public Action<BattleEntity, IEnumerable<BattleEntity>,
             IBattleMove> onMoveUsed
         { get; set; }
-        
+
         public bool IsDead { get; private set; }
 
         protected IBattleBehaviour battleBehaviour;
@@ -63,10 +64,10 @@ namespace RpgEssentials.TurnBased
 
         #region Turn Functionality
 
-        public void StartTurn()
-        { 
+        public void StartTurn(BattleBoard board)
+        {
             StartOverride();
-            battleBehaviour.StartBehaviour();
+            battleBehaviour.StartBehaviour(board);
             onEnterTurn?.Invoke(this);
         }
 
@@ -100,9 +101,10 @@ namespace RpgEssentials.TurnBased
         /// <param name="targets">Target Entities</param>
         public void UseMove(IBattleMove move, IEnumerable<BattleEntity> targets)
         {
+            UnityEngine.Debug.Log(Mold.EntityName + " used " + move.Identifier + " on people");
             //Resolve move
             move?.ResolveMove(this, targets);
-           
+
             //Invoke event
             onMoveUsed?.Invoke(this, targets, move);
         }
@@ -114,7 +116,7 @@ namespace RpgEssentials.TurnBased
         public void QuerryVitality()
         {
             if (!IsAlive())
-            {     
+            {
                 IsDead = true;
                 onDeath?.Invoke(this);
             }
@@ -122,7 +124,7 @@ namespace RpgEssentials.TurnBased
             {
                 if (IsDead)
                     onRevive?.Invoke(this);
-                IsDead = false;                
+                IsDead = false;
             }
         }
 

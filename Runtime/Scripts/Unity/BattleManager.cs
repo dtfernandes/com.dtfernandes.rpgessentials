@@ -1,5 +1,4 @@
 using UnityEngine;
-using RpgEssentials.TurnBased;
 using System;
 
 namespace RpgEssentials.TurnBased
@@ -41,6 +40,8 @@ namespace RpgEssentials.TurnBased
             _board.AddEntities(BattleInfo.Party);
 
             OnStartBattle?.Invoke();
+
+            _board.StartBattle();
         }
 
     }

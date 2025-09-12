@@ -46,7 +46,7 @@ namespace RpgEssentials.TurnBased
             return entities.First(x => x.InBattleID == id);
         }
 
-        public void BeginBattle()
+        public void StartBattle()
         {
             //SetupBoard
             NextTurn();
@@ -67,7 +67,7 @@ namespace RpgEssentials.TurnBased
             onEndTurn?.Invoke(previousEntity);
 
             //Start Next Turn
-            TurnEntity.StartTurn();
+            TurnEntity.StartTurn(this);
 
             //Assign onEndTurn to new Entity
             TurnEntity.onEndTurn =
@@ -82,6 +82,10 @@ namespace RpgEssentials.TurnBased
 
         protected abstract BattleEntity PrepareTurnOrder();
 
+        // internal void PerformAction(IBattleMove move, BattleEntity user, IEnumerable<BattleEntity> targets)
+        // {
+        //     move?.ResolveMove(user, targets);
+        // }
     }
 }
 

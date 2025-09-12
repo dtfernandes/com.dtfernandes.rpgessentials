@@ -36,7 +36,7 @@ namespace RpgEssentials.TurnBased
                 foreach (BattleEntity entity in duplicateList)
                 {
                     //Check if entity has enough turn to use
-                    if (entity.Turn > 0)
+                    if (!entity.IsDead)
                     {
                         //If it has, add copy of entity to turn list
                         BattleEntity copy = entity.Copy();

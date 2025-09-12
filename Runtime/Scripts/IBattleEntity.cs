@@ -5,7 +5,7 @@
     /// </summary>
     public interface IBattleEntity
     {
-        void StartTurn();
+        void StartTurn(BattleBoard board);
         void UpdateTurn();
         void EndTurn();
 
