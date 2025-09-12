@@ -1,10 +1,12 @@
 ﻿using System;
+using UnityEngine;
 
 namespace RpgEssentials.TurnBased
 {
-    public class UnitySimpleBattleBoard : SimpleBattleBoard<UnitySimpleBattleEntity>
+    //CAN BE SAFELY DELETED
+    public class UnitySimpleBattleBoard : MonoBehaviour
     {
-      
+
     }
 }
 

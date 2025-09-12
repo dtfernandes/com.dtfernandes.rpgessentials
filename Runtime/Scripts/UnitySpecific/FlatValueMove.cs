@@ -4,18 +4,20 @@ using UnityEngine;
 namespace RpgEssentials.TurnBased
 {
     [CreateAssetMenu(menuName =
-    RPGEssentialsPaths.generalScriptablePath + "/BattleMove/FlatMove",
+    RPGEssentialsPaths.GENERAL_SCRIPTABLE_PATH + "/BattleMove/FlatMove",
     fileName = "New Flat Move")]
-    public class FlatValueMove: BattleMoveTemplate
+    public class FlatValueMove : BattleMoveTemplate
     {
-        [SerializeField] [HideInInspector]
+        [SerializeField]
+        [HideInInspector]
         private int param1;
 
 
-        protected override void ResolveMoveAbstract(BattleEntity attacker, 
+        protected override void ResolveMoveAbstract(BattleEntity attacker,
             BattleEntity target, bool check)
         {
-            target.Mold.SetAtIndex(param1, x => {
+            target.Mold.SetAtIndex(param1, x =>
+            {
                 x.CurrentValue -= value;
                 return x;
             });

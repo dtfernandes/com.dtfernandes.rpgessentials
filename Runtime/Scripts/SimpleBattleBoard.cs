@@ -3,49 +3,49 @@ using System.Linq;
 
 namespace RpgEssentials.TurnBased
 {
-    public abstract class SimpleBattleBoard<T> : BattleBoard<T> where T : BattleEntity
+    public class SimpleBattleBoard : BattleBoard
     {
-        public IList<T> TurnOrder { get; private set; }
+        public IList<BattleEntity> TurnOrder { get; private set; }
 
-        protected override T PrepareTurnOrder()
+        protected override BattleEntity PrepareTurnOrder()
         {
-            TurnOrder = new List<T> { };
+            TurnOrder = new List<BattleEntity> { };
 
             //Gather all alive entities
-            IEnumerable<T> aliveEntities = 
-                Entities.Where(x => !x.IsDead).Select(x => x as T);
-         
+            IEnumerable<BattleEntity> aliveEntities =
+                Entities.Where(x => !x.IsDead).Select(x => x as BattleEntity);
+
             //Check if there're still entities than have enough turns
-            if(!aliveEntities.Any(x => x.Turn > 0))
+            if (!aliveEntities.Any(x => x.Turn > 0))
             {
                 //If there aren't reset the entities and begin a new turn
-                foreach(T entity in aliveEntities)
+                foreach (BattleEntity entity in aliveEntities)
                 {
                     entity.ResetTurns();
                 }
             }
 
-            IList<T> duplicateList =
-                aliveEntities.Select(x => x.Copy() as T).ToList();
+            IList<BattleEntity> duplicateList =
+                aliveEntities.Select(x => x.Copy()).ToList();
 
-                 
+
             int loops = 0;
-            do {
+            do
+            {
                 //Iterate trough all the entities
-                foreach (T entity in duplicateList)
+                foreach (BattleEntity entity in duplicateList)
                 {
                     //Check if entity has enough turn to use
                     if (entity.Turn > 0)
-                    {                       
+                    {
                         //If it has, add copy of entity to turn list
-                        T copy =
-                            entity.Copy() as T;                        
+                        BattleEntity copy = entity.Copy();
                         TurnOrder.Add(copy);
                         entity.Turn--;
                     }
                 }
                 loops++;
-                if(loops >= 50)
+                if (loops >= 50)
                 {
                     throw new System.Exception("Infinit Loop");
                 }

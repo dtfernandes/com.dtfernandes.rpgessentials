@@ -1,42 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Linq;
 
 namespace RpgEssentials.TurnBased
 {
-
     /// <summary>
     /// Class responsible for handling the logistics of a Battle
     /// </summary>
-    /// <typeparam name="T">Entities populating the Battle</typeparam>
-    public abstract class BattleBoard<T> : IBattleBoard where T : BattleEntity
+    public abstract class BattleBoard : IBattleBoard
     {
-        public Action<T> onStartTurn { get; set; }
-        public Action<T> onEndTurn { get; set; }
+        public Action<BattleEntity> onStartTurn { get; set; }
+        public Action<BattleEntity> onEndTurn { get; set; }
 
-        protected T turnEntity { get; set; }
-        protected IList<T> entities { get; set; }
+        protected BattleEntity turnEntity { get; set; }
+        protected IList<BattleEntity> entities { get; set; }
 
-        public BattleEntity TurnEntity 
-        { get => turnEntity; set => turnEntity = value as T; }
+        public BattleEntity TurnEntity
+        { get => turnEntity; set => turnEntity = value; }
 
-        public IEnumerable<BattleEntity> Entities{ get => entities; }
+        public IEnumerable<BattleEntity> Entities { get => entities; }
 
         public BattleBoard()
         {
-            entities = new List<T> { };
+            entities = new List<BattleEntity> { };
         }
- 
+
         /// <summary>
         /// Method responsible for add a new list of entities to 
         /// the internal list of entities.
         /// </summary>
         /// <param name="newEntities">List of entities to add.</param>
-        public void AddEntities(IEnumerable<T> newEntities)
+        public void AddEntities(IEnumerable<BattleEntity> newEntities)
         {
             short firstId = (short)entities.Count;
-            foreach(T entity in newEntities)
+            foreach (BattleEntity entity in newEntities)
             {
                 entity.InBattleID = firstId;
                 firstId++;
@@ -44,7 +41,7 @@ namespace RpgEssentials.TurnBased
             }
         }
 
-        public T GetEntityFromId(int id)
+        public BattleEntity GetEntityFromId(int id)
         {
             return entities.First(x => x.InBattleID == id);
         }
@@ -58,8 +55,8 @@ namespace RpgEssentials.TurnBased
         public void NextTurn()
         {
             //Save Previous Entity
-            T previousEntity = turnEntity;
-            
+            BattleEntity previousEntity = turnEntity;
+
             //End Current Turn 
             TurnEntity?.EndTurn();
 
@@ -82,8 +79,8 @@ namespace RpgEssentials.TurnBased
 
             onStartTurn?.Invoke(turnEntity);
         }
-       
-        protected abstract T PrepareTurnOrder();
+
+        protected abstract BattleEntity PrepareTurnOrder();
 
     }
 }

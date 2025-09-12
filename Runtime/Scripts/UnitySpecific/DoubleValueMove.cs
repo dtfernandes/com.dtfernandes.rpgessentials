@@ -4,19 +4,21 @@ using UnityEngine;
 namespace RpgEssentials.TurnBased
 {
     [CreateAssetMenu(menuName =
-    RPGEssentialsPaths.generalScriptablePath + "/BattleMove/DoubleValue",
+    RPGEssentialsPaths.GENERAL_SCRIPTABLE_PATH + "/BattleMove/DoubleValue",
     fileName = "New Double Value Move")]
-    public class DoubleValueMove: BattleMoveTemplate
+    public class DoubleValueMove : BattleMoveTemplate
     {
-        [SerializeField] [HideInInspector]
+        [SerializeField]
+        [HideInInspector]
         private int param1;
-        [SerializeField] [HideInInspector]
+        [SerializeField]
+        [HideInInspector]
         private int param2;
 
-        protected override void ResolveMoveAbstract(BattleEntity attacker, 
+        protected override void ResolveMoveAbstract(BattleEntity attacker,
             BattleEntity target, bool check)
         {
-            target.Mold.SetAtIndex(param1, x => 
+            target.Mold.SetAtIndex(param1, x =>
             {
                 int multiplier = (int)attacker.Mold.GetStatAt(param2);
                 UnityEngine.Debug.Log(target.InBattleID + " recieved: " + value * multiplier + " damage.");
@@ -25,7 +27,7 @@ namespace RpgEssentials.TurnBased
             });
 
 
-            
+
         }
 
         public override IList<int> GetParams()

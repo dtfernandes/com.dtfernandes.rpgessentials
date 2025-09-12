@@ -19,7 +19,7 @@ namespace RpgEssentials.TurnBased.Editor
         {
             EditorUtility.SetDirty(target);
             moves = serializedObject.FindProperty("moves");
- 
+
 
             moldfoldout = true;
             movesfoldout = true;
@@ -33,13 +33,12 @@ namespace RpgEssentials.TurnBased.Editor
 
             EntityTemplate template = target as EntityTemplate;
             EntityMold mold = template.Mold;
-            List<BattleStat> listOfStats =
-                mold.ToList().ToList();
+            List<BattleStat> listOfStats = mold.ToList().ToList();
 
 
 
             moldfoldout = EditorGUILayout.BeginFoldoutHeaderGroup(moldfoldout, "Mold");
-           
+
             if (moldfoldout)
             {
                 for (int i = 0; i < listOfStats.Count; i++)
@@ -54,23 +53,23 @@ namespace RpgEssentials.TurnBased.Editor
                         template.SerializedStats.Add(new SerializableBattleStat());
 
                     SerializableBattleStat ent = template.SerializedStats[i];
-                    
+
                     RangedInt templateStat = default;
                     templateStat = CustomEditorGUILayout.RangeIntField(ent.DefaultValue);
 
-                    
+
 
                     //If the values are diferent then the users changed the value
                     if (templateStat != template.SerializedStats[i].DefaultValue
                         || templateStat.Flatten != template.SerializedStats[i].DefaultValue.Flatten)
                     {
-                        SerializableBattleStat newSerStat = 
-                            new SerializableBattleStat(bs.Name, templateStat); 
+                        SerializableBattleStat newSerStat =
+                            new SerializableBattleStat(bs.Name, templateStat);
 
                         template.SerializedStats[i] = newSerStat;
 
                         BattleStat newStat = new BattleStat(newSerStat.DefaultValue, bs.Name);
-                        mold.SetAtIndex(i, newStat);                        
+                        mold.SetAtIndex(i, newStat);
                     }
 
                     GUILayout.EndHorizontal();
@@ -84,10 +83,10 @@ namespace RpgEssentials.TurnBased.Editor
             if (movesfoldout)
             {
                 //Get list of moves
-                if(GUILayout.Button("Add Move"))
+                if (GUILayout.Button("Add Move"))
                 {
                     moves.InsertArrayElementAtIndex(moves.arraySize);
-                }         
+                }
                 for (int i = 0; i < moves.arraySize; i++)
                 {
                     SerializedProperty s = moves.GetArrayElementAtIndex(i);

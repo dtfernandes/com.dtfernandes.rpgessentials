@@ -3,7 +3,7 @@
 namespace RpgEssentials.TurnBased
 {
     /// <summary>
-    /// Helper Struct resoncible for serializing the BattleStat struct
+    /// Helper Struct responsible for serializing the BattleStat struct
     /// </summary>
     [System.Serializable]
     public struct SerializableBattleStat
@@ -15,7 +15,7 @@ namespace RpgEssentials.TurnBased
         //Default value of the BattleStat
         [SerializeField]
         private RangedInt defaultValue;
-  
+
         /// <summary>
         /// Default value of the BatteStat
         /// </summary>
@@ -38,7 +38,7 @@ namespace RpgEssentials.TurnBased
         /// <param name="self">Given SerializedBattleStat</param>
         public static implicit operator BattleStat(SerializableBattleStat self)
         {
-            BattleStat newBattleStat = 
+            BattleStat newBattleStat =
                 new BattleStat(self.defaultValue, self.name);
             return newBattleStat;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using System.Diagnostics;
 
 namespace RpgEssentials.TurnBased
 {
@@ -10,8 +11,14 @@ namespace RpgEssentials.TurnBased
         private List<IBattleMove> moves;
         public List<IBattleMove> Moves { get => moves; set => moves = value; }
 
+        /// <summary>
+        /// Defines if the stats persist after battle.
+        /// </summary>
         public abstract bool IsPresistent { get; protected set; }
 
+        /// <summary>
+        /// The name of the entity
+        /// </summary>
         public abstract string EntityName { get; protected set; }
 
         //Constructor for the EntityMold class
@@ -27,13 +34,13 @@ namespace RpgEssentials.TurnBased
             IEnumerable<PropertyInfo> statsInfo = GetType().GetProperties().
                     Where(x => x.PropertyType == typeof(BattleStat));
 
-            return statsInfo.Select(x => new BattleStat(x.Name,(BattleStat)x.GetValue(this)));
+            return statsInfo.Select(x => new BattleStat(x.Name, (BattleStat)x.GetValue(this)));
         }
 
         public void ReplaceAll(IEnumerable<BattleStat> stats)
         {
             int i = 0;
-            foreach(BattleStat bs in stats)
+            foreach (BattleStat bs in stats)
             {
                 SetAtIndex(i, bs);
                 i++;
@@ -42,7 +49,7 @@ namespace RpgEssentials.TurnBased
 
         public void SetAtIndex(int index, System.Func<BattleStat, BattleStat> func)
         {
-            SetAtIndex(index, 
+            SetAtIndex(index,
                 func?.Invoke(GetStatAt(index)) ?? new BattleStat());
         }
 
@@ -51,7 +58,7 @@ namespace RpgEssentials.TurnBased
             GetType().GetProperties().
                  Where(x => x.PropertyType
                  == typeof(BattleStat)).ElementAt(index).SetValue(this, stat);
-        }  
+        }
 
         public BattleStat GetStatAt(int index)
         {
