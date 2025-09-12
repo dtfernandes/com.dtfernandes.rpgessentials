@@ -3,18 +3,11 @@ using System.Collections.Generic;
 
 namespace RpgEssentials.TurnBased
 {
-    public class AIBattleBehaviour<T> : IBattleBehaviour where T: IBattleBoard
+    public class AIBattleBehaviour : IBattleBehaviour
     {
         protected BattleEntity entity;
-        protected T board;
 
-        public AIBattleBehaviour(T board)
-        {
-            
-            this.board = board;
-        }
-
-        public virtual void StartBehaviour()
+        public virtual void StartBehaviour(BattleBoard board)
         {
             entity = board.TurnEntity;
 
@@ -22,13 +15,15 @@ namespace RpgEssentials.TurnBased
             IBattleMove selectedMove = entity.Mold.Moves[0];
 
             //Select all possible entities
-            IEnumerable<BattleEntity> entities = 
+            IEnumerable<BattleEntity> entities =
                 board.Entities.Where(x => x.IsPlayer && !x.IsDead);
 
             //Resolve Attack
-            entity.UseMove(selectedMove,entities);
+            entity.UseMove(selectedMove, entities);
+
+            board.NextTurn();
         }
-    
+
         public virtual bool UpdateBehaviour()
         {
             return true;
@@ -36,7 +31,7 @@ namespace RpgEssentials.TurnBased
 
         public virtual void EndBehaviour()
         {
-         
+
         }
 
     }
