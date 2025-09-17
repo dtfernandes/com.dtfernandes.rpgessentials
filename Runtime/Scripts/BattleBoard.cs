@@ -25,6 +25,8 @@ namespace RpgEssentials.TurnBased
             entities = new List<BattleEntity> { };
         }
 
+        public int Turn { get; private set; }
+
         /// <summary>
         /// Method responsible for add a new list of entities to 
         /// the internal list of entities.
@@ -54,6 +56,16 @@ namespace RpgEssentials.TurnBased
 
         public void NextTurn()
         {
+            Turn++;
+
+            // Check win condition (for now lets just check if there's only one team left)
+            if (IsBattleOver())
+            {
+
+                return;
+            }
+
+
             //Save Previous Entity
             BattleEntity previousEntity = turnEntity;
 
@@ -78,6 +90,18 @@ namespace RpgEssentials.TurnBased
                 };
 
             onStartTurn?.Invoke(turnEntity);
+
+
+        }
+
+        private bool IsBattleOver()
+        {
+            HashSet<SelectionTeam> aliveTeams =
+                Entities.Where(x => !x.IsDead).Select(x => x.Team).ToHashSet();
+
+            UnityEngine.Debug.Log("Teams in play: " + aliveTeams.Count);
+
+            return aliveTeams.Count <= 1 || Turn >= 5;
         }
 
         protected abstract BattleEntity PrepareTurnOrder();

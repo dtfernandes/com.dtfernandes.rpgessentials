@@ -5,14 +5,14 @@
         public int MaxTurns { get; protected set; }
 
         protected SimpleBattleEntity(EntityMold mold,
-            IBattleBehaviour battleBehaviour) : base(mold, battleBehaviour)
+            IBattleBehaviour battleBehaviour, SelectionTeam team) : base(mold, battleBehaviour, team)
         {
 
         }
 
         public override void ResetTurns()
         {
-            Turn = MaxTurns; 
+            Turn = MaxTurns;
         }
     }
 

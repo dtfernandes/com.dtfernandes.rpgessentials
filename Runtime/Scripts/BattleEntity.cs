@@ -29,11 +29,14 @@ namespace RpgEssentials.TurnBased
 
         public bool IsDead { get; private set; }
 
+        public SelectionTeam Team { get; private set; }
+
         protected IBattleBehaviour battleBehaviour;
 
         //Constructor for the BattleEntity class
-        protected BattleEntity(EntityMold mold, IBattleBehaviour battleBehaviour)
+        protected BattleEntity(EntityMold mold, IBattleBehaviour battleBehaviour, SelectionTeam team)
         {
+            Team = team;
             Mold = mold.Copy();
 
             int i = 0;
