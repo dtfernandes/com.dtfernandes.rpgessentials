@@ -104,7 +104,6 @@ namespace RpgEssentials.TurnBased
         /// <param name="targets">Target Entities</param>
         public void UseMove(IBattleMove move, IEnumerable<BattleEntity> targets)
         {
-            UnityEngine.Debug.Log(Mold.EntityName + " used " + move.Identifier + " on people");
             //Resolve move
             move?.ResolveMove(this, targets);
 

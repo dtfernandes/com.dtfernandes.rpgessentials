@@ -9,8 +9,12 @@ namespace RpgEssentials.TurnBased
     /// </summary>
     public abstract class BattleBoard : IBattleBoard
     {
-        public Action<BattleEntity> onStartTurn { get; set; }
-        public Action<BattleEntity> onEndTurn { get; set; }
+        // ## Events 
+        public event Action<BattleEntity> onStartTurn;
+        public event Action<BattleEntity> onEndTurn;
+
+        // ## Properties
+        public int Turn { get; private set; }
 
         protected BattleEntity turnEntity { get; set; }
         protected IList<BattleEntity> entities { get; set; }
@@ -20,12 +24,13 @@ namespace RpgEssentials.TurnBased
 
         public IEnumerable<BattleEntity> Entities { get => entities; }
 
+
+
+
         public BattleBoard()
         {
             entities = new List<BattleEntity> { };
         }
-
-        public int Turn { get; private set; }
 
         /// <summary>
         /// Method responsible for add a new list of entities to 

@@ -16,7 +16,7 @@ namespace RpgEssentials.TurnBased
 
             //Select all possible entities
             IEnumerable<BattleEntity> entities =
-                board.Entities.Where(x => x.IsPlayer && !x.IsDead);
+                board.Entities.Where(x => x.Team != entity.Team && !x.IsDead);
 
             //Resolve Attack
             entity.UseMove(selectedMove, entities);

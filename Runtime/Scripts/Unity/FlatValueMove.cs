@@ -16,6 +16,8 @@ namespace RpgEssentials.TurnBased
         protected override void ResolveMoveAbstract(BattleEntity attacker,
             BattleEntity target, bool check)
         {
+
+
             target.Mold.SetAtIndex(param1, x =>
             {
                 x.CurrentValue -= value;

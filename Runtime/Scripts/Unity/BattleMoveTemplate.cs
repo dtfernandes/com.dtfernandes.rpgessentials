@@ -13,7 +13,8 @@ namespace RpgEssentials.TurnBased
         private Sprite moveIcon;
         public Sprite MoveIcon => moveIcon;
 
-        [SerializeField] [HideInInspector]
+        [SerializeField]
+        [HideInInspector]
         private int selectedMold;
         [SerializeField]
         protected int value;
@@ -35,7 +36,7 @@ namespace RpgEssentials.TurnBased
         public SelectionTeam Team => team;
         public SelectionMode Mode => mode;
 
-       
+
 
         public abstract IList<int> GetParams();
         public abstract void SetParams(IList<int> parameters);
@@ -59,9 +60,9 @@ namespace RpgEssentials.TurnBased
         {
             bool passes = true;
 
-            foreach(ConditionPacket packet in conditions)
+            foreach (ConditionPacket packet in conditions)
             {
-                if(!packet.GetCondition().Condition(battleBoard , x, template))
+                if (!packet.GetCondition().Condition(battleBoard, x, template))
                 {
                     passes = false;
                     break;
@@ -157,12 +158,12 @@ namespace RpgEssentials.TurnBased
         [SerializeField] private int sizeMulti;
         //List of condition types based on reflection
         [SerializeField] private List<int> values;
-        
+
         [SerializeField] private int conditionIndex;
 
 
         public ICondition GetCondition()
-        { 
+        {
             //Create Name List of Possible Conditions                    
             var type = typeof(ICondition);
 
