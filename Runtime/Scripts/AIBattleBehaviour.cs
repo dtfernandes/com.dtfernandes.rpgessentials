@@ -20,8 +20,6 @@ namespace RpgEssentials.TurnBased
 
             //Resolve Attack
             entity.UseMove(selectedMove, entities);
-
-            board.NextTurn();
         }
 
         public virtual bool UpdateBehaviour()

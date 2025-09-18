@@ -6,7 +6,6 @@
     public interface IBattleEntity
     {
         void StartTurn(BattleBoard board);
-        void UpdateTurn();
         void EndTurn();
 
         int Turn { get; set; }

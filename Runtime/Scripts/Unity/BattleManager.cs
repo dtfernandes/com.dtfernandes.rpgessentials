@@ -25,6 +25,7 @@ namespace RpgEssentials.TurnBased
         public static void PrepareBattle(BattleDataPacket packet)
         {
             BattleInfo = packet;
+            OnStartBattle = null;
         }
 
         public void StartBattle()
@@ -33,13 +34,15 @@ namespace RpgEssentials.TurnBased
             // Make the abstract Board a concrete class and use the Simple/PressTurn as things to composite
             _board = new SimpleBattleBoard();
 
+            OnStartBattle?.Invoke();
+
             // Add the enemies to the board
             _board.AddEntities(BattleInfo.Enemies);
 
             // Add the party to the board
             _board.AddEntities(BattleInfo.Party);
 
-            OnStartBattle?.Invoke();
+
 
             _board.StartBattle();
         }

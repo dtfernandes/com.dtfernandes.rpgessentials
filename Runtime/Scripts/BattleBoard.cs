@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Diagnostics;
 
 namespace RpgEssentials.TurnBased
 {
@@ -37,14 +38,19 @@ namespace RpgEssentials.TurnBased
         /// the internal list of entities.
         /// </summary>
         /// <param name="newEntities">List of entities to add.</param>
-        public void AddEntities(IEnumerable<BattleEntity> newEntities)
+        public void AddEntities(IList<BattleEntity> newEntities)
         {
             short firstId = (short)entities.Count;
-            foreach (BattleEntity entity in newEntities)
+
+            for (int i = 0; i < newEntities.Count(); i++)
             {
-                entity.InBattleID = firstId;
+                entities.Add(newEntities[i]);
+                newEntities[i].InBattleID += firstId;
                 firstId++;
-                entities.Add(entity);
+                newEntities[i].onEndTurn += (x) =>
+                {
+                    NextTurn();
+                };
             }
         }
 
@@ -70,12 +76,8 @@ namespace RpgEssentials.TurnBased
                 return;
             }
 
-
             //Save Previous Entity
             BattleEntity previousEntity = turnEntity;
-
-            //End Current Turn 
-            TurnEntity?.EndTurn();
 
             //Select new Entity
             TurnEntity = PrepareTurnOrder();
@@ -86,25 +88,23 @@ namespace RpgEssentials.TurnBased
             //Start Next Turn
             TurnEntity.StartTurn(this);
 
-            //Assign onEndTurn to new Entity
-            TurnEntity.onEndTurn =
-                x =>
-                {
-                    //Go to Next Turn
-                    NextTurn();
-                };
+
+
+            string battleStatus = "";
+            foreach (BattleEntity be in Entities)
+            {
+                battleStatus += be.InBattleID + ". " + be.Team + " - " + be.InTurn + "\n";
+            }
+            UnityEngine.Debug.Log("Turn: " + Turn + "\n " + battleStatus);
+
 
             onStartTurn?.Invoke(turnEntity);
-
-
         }
 
         private bool IsBattleOver()
         {
             HashSet<SelectionTeam> aliveTeams =
                 Entities.Where(x => !x.IsDead).Select(x => x.Team).ToHashSet();
-
-            UnityEngine.Debug.Log("Teams in play: " + aliveTeams.Count);
 
             return aliveTeams.Count <= 1 || Turn >= 5;
         }

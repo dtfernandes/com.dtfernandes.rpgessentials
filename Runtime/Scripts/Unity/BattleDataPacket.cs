@@ -9,13 +9,13 @@ namespace RpgEssentials.TurnBased
     public class BattleDataPacket
     {
         // Enemies
-        public IEnumerable<BattleEntity> Enemies { get; private set; }
-        public IEnumerable<BattleEntity> Party { get; private set; }
+        public IList<BattleEntity> Enemies { get; private set; }
+        public IList<BattleEntity> Party { get; private set; }
 
         // Circumstances -- Flank, Surprise etc
         // private [some enum]
 
-        public BattleDataPacket(IEnumerable<BattleEntity> enemies, IEnumerable<BattleEntity> party)
+        public BattleDataPacket(IList<BattleEntity> enemies, IList<BattleEntity> party)
         {
             Enemies = enemies;
             Party = party;

@@ -12,8 +12,7 @@ namespace RpgEssentials.TurnBased
             TurnOrder = new List<BattleEntity> { };
 
             //Gather all alive entities
-            IEnumerable<BattleEntity> aliveEntities =
-                Entities.Where(x => !x.IsDead).Select(x => x as BattleEntity);
+            IEnumerable<BattleEntity> aliveEntities = Entities.Where(x => !x.IsDead).Select(x => x);
 
             //Check if there're still entities than have enough turns
             if (!aliveEntities.Any(x => x.Turn > 0))
@@ -60,7 +59,7 @@ namespace RpgEssentials.TurnBased
                 throw new System.Exception("Turn list is empty. Check if templates have maxTurn at 0.");
 
             //return the entity selected to be next
-            return entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
+            return Entities.First(x => x.Equals(TurnOrder.FirstOrDefault()));
         }
     }
 }

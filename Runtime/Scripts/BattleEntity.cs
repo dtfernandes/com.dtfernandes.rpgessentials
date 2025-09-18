@@ -6,26 +6,23 @@ namespace RpgEssentials.TurnBased
 {
     public abstract class BattleEntity : IBattleEntity, IEquatable<BattleEntity>
     {
+
+        public event Action<BattleEntity> onEnterTurn;
+        internal event Action<BattleEntity> onEndTurn;
+        public event Action<BattleEntity> onExitTurn;
+        public event Action<BattleEntity> onDeath;
+        public event Action<BattleEntity> onRevive;
+        public event Action<BattleEntity, IEnumerable<BattleEntity>, IBattleMove> onMoveUsed;
+
+
         public short InBattleID { get; set; }
 
         public int Turn { get; set; }
+        public bool InTurn { get; protected set; }
 
         public EntityMold Mold { get; set; }
 
         public bool IsPlayer => battleBehaviour is PlayerBattleBehaviour;
-
-        public Action<BattleEntity> onEnterTurn { get; set; }
-
-        internal Action<BattleEntity> onEndTurn { get; set; }
-
-        public Action<BattleEntity> onExitTurn { get; set; }
-
-        public Action<BattleEntity> onDeath { get; set; }
-        public Action<BattleEntity> onRevive { get; set; }
-
-        public Action<BattleEntity, IEnumerable<BattleEntity>,
-            IBattleMove> onMoveUsed
-        { get; set; }
 
         public bool IsDead { get; private set; }
 
@@ -69,28 +66,25 @@ namespace RpgEssentials.TurnBased
 
         public void StartTurn(BattleBoard board)
         {
+
             StartOverride();
+            InTurn = true;
             battleBehaviour.StartBehaviour(board);
+
             onEnterTurn?.Invoke(this);
+
         }
 
         protected abstract void StartOverride();
 
-        public virtual void UpdateTurn()
-        {
-            bool turnContinue =
-                battleBehaviour.UpdateBehaviour();
-
-            //if (!turnContinue) onEndTurn?.Invoke(this);
-
-
-        }
-
         public virtual void EndTurn()
         {
+            if (!InTurn) return;
+
             Turn--;
+            InTurn = false;
             battleBehaviour.EndBehaviour();
-            onExitTurn?.Invoke(this);
+            onEndTurn?.Invoke(this);
         }
 
         #endregion
@@ -126,6 +120,7 @@ namespace RpgEssentials.TurnBased
             {
                 if (IsDead)
                     onRevive?.Invoke(this);
+
                 IsDead = false;
             }
         }
@@ -165,11 +160,6 @@ namespace RpgEssentials.TurnBased
         public bool Equals(BattleEntity other)
         {
             return InBattleID == other.InBattleID;
-        }
-
-        public void ForceEndTurn()
-        {
-            onEndTurn?.Invoke(this);
         }
     }
 }
